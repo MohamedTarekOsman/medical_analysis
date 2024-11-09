@@ -7,9 +7,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [items, setItems] = useState([]);
   const [name, setName] = useState("");
-  const [low, setLow] = useState("");
   const [normal, setNormal] = useState("");
-  const [high, setHigh] = useState("");
   const [search, setSearch] = useState("");
 
   // Load items from localStorage on component mount
@@ -27,13 +25,11 @@ function App() {
   const handleCloseModal = () => setShowModal(false);
 
   const handleSave = () => {
-    if (name && low && normal && high) {
-      const newItem = { name, low, normal, high };
+    if (name  && normal) {
+      const newItem = { name, normal };
       setItems([...items, newItem]);
       setName("");
-      setLow("");
       setNormal("");
-      setHigh("");
       setShowModal(false);
     } else {
       alert("Please fill all fields.");
@@ -71,9 +67,7 @@ function App() {
           <Card className="mb-2" key={index}>
             <Card.Body>
               <Card.Title>{item.name}</Card.Title>
-              <Card.Text>Low Range: {item.low}</Card.Text>
               <Card.Text>Normal Range: {item.normal}</Card.Text>
-              <Card.Text>High Range: {item.high}</Card.Text>
               <Button variant="danger" onClick={() => handleDelete(index)}>
                 Delete
               </Button>
@@ -98,27 +92,11 @@ function App() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Low Range</Form.Label>
-              <Form.Control
-                type="number"
-                value={low}
-                onChange={(e) => setLow(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
               <Form.Label>Normal Range</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 value={normal}
                 onChange={(e) => setNormal(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>High Range</Form.Label>
-              <Form.Control
-                type="number"
-                value={high}
-                onChange={(e) => setHigh(e.target.value)}
               />
             </Form.Group>
           </Form>
